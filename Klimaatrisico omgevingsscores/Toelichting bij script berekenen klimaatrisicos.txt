@@ -1,0 +1,56 @@
+Toelichting bij script berekenen klimaatrisico’ s:
+
+Toelichting, voorbereiding en opbouw van dit script.
+Toelichting/achtergrond:
+In dit script worden de omgevingsrisico's berekend zoals beschreven in de methode 'Framework for Climate Adaptive Buildings (FCAB)'. De informatie over deze methodiek is te vinden op website van de Dutch Green Building Council : https://www.dgbc.nl/framework-climate-adaptive-buildings-259
+Deze omgevingsrisico's geven een eerste inschatting van fysieke klimaatrisico's voor gebouwen.
+De reden om klimaatrisico's voor gebouwen te berekenen zijn:
+-	Klimaatveranderingen hebben gevolgen voor gebouwen (b.v. verzakking) en hun bewoners (bv hittestress)
+-	Financiële toezichthouders vragen om rapportages rondom klimaatrisico's van gebouwen, omdat klimaatschade aan vastgoed grote financiële gevolgen kan hebben.
+
+De informatie inde klimaateffectenatlas is nog niet op de KNMI klimaatscenario's van 2023 gebaseerd. Verwachting is dat dit begin 2025 is gedaan.
+
+Voorbereiding voor draaien van het script:
+-	Bepaal of je ArcGIS licentie de module Spatial bevat. Indien je deze licentie niet hebt, zal dit script foutmeldingen geven!
+-	Haal de benodigde kaarten op van de website van de klimaateffectenatlas. Ga naar https://www.klimaateffectatlas.nl/
+-	Kies optie Data opvragen. Via de data opvraag krijg je een download link. Pak de data uit en koppel de folder aan je ArcGIS Pro.
+-	Voeg de 7 tiff bestanden en 2 geopackages toe aan je project.
+-	Haal uit de living atlas de feature layer BAG 2.0 - pand op en voeg deze aan de 'current map' toe.
+
+
+ 
+Opbouw script:
+Basis voor het bepalen van omgevingsrisico's van het bezit zijn de openbare kaarten BAG/pand en diverse kaarten uit de Klimaateffectenatlas.
+In dit script houden wij rekening met een laag waarin de verblijfobjecten zitten van een organisatie.
+Dit zorgt voor een kortere doorlooptijd, omdat wij oa de panden daarop filteren.
+Door dat bezit niet mee te nemen, kun je de risico's inschatten voor alle panden in Nl.
+Voor de volgende risico gebieden wordt omgevingsrisico's berekend:
+-	Hittestress door warme nachten
+-	Droogte (Natuurbranden, Paalrot en Verschilzetting)
+-	Wateroverlast (Waterdiepte bij hevige regenbui en grondwateroverlast)
+-	Overstroming (Plaatsgebonden overstromingskans en Maximale waterdiepte)
+
+Per risicogebied is een functie gemaakt. Onderaan het script staat de code voor uitvoer. Bij deze code moet wel eerst 'uncommented' worden.
+Dit geeft je wel de kans om alles uit te voeren en te testen, zonder dat er van alles wordt vastgelegd.
+
+Per risicogebied wordt het volgende uitgevoerd/berekend:
+-	Kaart uit de klimaateffecten atlas wordt bepaald. indien nodig wordt deze kaartlaag alsnog aan de map toegevoegd
+-	Data uit het onderdeel exporteren naar punten
+-	Join field van de puntenkaart van de woonwaard woningen met de punten van de kaart
+-	Hernoem basisveld uit kaartlaag naar de context van het onderdeel.
+-	Berekenen van index, bruto risico en volgnr op basis van veld 'rastervalue' van het onderdeel. 
+Aan het einde van een onderdeel worden de tijdelijke bestanden verwijderd.
+
+ 
+Uitzondering berekening van droogte/paalrot: 
+-	In basis worden dezelfde stappen gedaan, echter bij dit onderdeel wordt ook bouwjaar gebruikt in de bepaling van waarde va de uitvoer.
+Uitzondering berekening wateroverlast/grondwateroverlast:
+-	In basis worden dezelfde stappen gedaan, echter zijn er nu 3 datasets nodig voor de berekeningen. 
+Dit omdat de omgevingsrisico grondwateroverlast door de combinatie van grondwater hoogte en bodemdaling wordt bepaald.
+
+In het script zitten op diverse plaatsen een 'schemaLock()' dit is een procedure die wordt aangeroepen om te controleren of het uitvoer bestand wel 'unlocked' is, zodat het uitvoer kan worden bijgewerkt. Indien er een lock wordt gevonden wordt een wachttijd van 5 secondes ingevoerd, om de lock op te lossen. Na 5 sec wordt er opnieuw een lock controle gedaan, deze stap wordt net zolang herhaald tot de lock is opgeheven.
+
+Het resultaat van dit script is 1 uitvoerdataset waarin de resultaten van de diverse analyses achter elkaar staan per eenheid.
+
+In dit script worden diverse functies/procedures gemaakt, die helemaal onderin kunnen worden uitgevoerd (door die regels van commentaar af te halen).
+
