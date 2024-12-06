@@ -1,2 +1,2 @@
 # Python
-Diverse scripts om te delen met andere Woningcorporaties
+Diverse python scripts om te delen met andere Woningcorporaties
