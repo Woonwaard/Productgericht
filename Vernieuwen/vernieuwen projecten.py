@@ -6,7 +6,7 @@ Met het vernieuwen van de oefen laag en het script ervoor als basis maken wij ee
 Bij 1 cluster kunnen meerdere projecten zijn. Een project kan meerdere clusters betreffen.
 
 de volgende stappen zijn relevant:
- 1a- Controleer de projectinformatie in arcgis.vw_alle_projecten
+ 1a- Controleer de projectinformatie in <uw tabel of view met project data>
  1b- Via Export Table kopier deze view naar tabel Alleprojecten, zodat deze tabel kan worden gekoppeld aan de clusterinformatie
  2a- Haal recent clustermodel op (clusters zijn nodig omdat deze al geocodering hebben en projecten zijn aan clusters gekoppeld)
  2b- Kopieer deze via exportfeatures naar Clustersvoorprojecten neem nu niet alle velden mee.
@@ -39,7 +39,6 @@ startTime = time.time()
 Clusterswoonwaard = r"C:\Projecten\Woonwaard_Clusters\Woonwaard_objecten.gdb\WoonwaardClusterModel"
 Clustersprojecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Clustersvprojecten"
 AlleProjecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\AlleProjecten"
-Projectclusters = "Projectclusters"
 Projecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Projecten"
 Projecten_nw = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Projecten_nw"
 
