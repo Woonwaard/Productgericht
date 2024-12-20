@@ -20,7 +20,6 @@ de volgende stappen zijn relevant:
 30-4-24: Het veld omschrijving toegevoegd dit is de lange omschrijving uit de tabel Project_omschrijving
 2 aug 2024: Melding naar teams aangepast van connector naar webhook via Power Automate
 
-
 '''
 
 
@@ -34,6 +33,7 @@ import json, requests
 startTime = time.time()
 
 # Parameters:
+#Vervang de locaties door uw eigen locaties op de harde schijf bij het project!!
 Clusterswoonwaard = r"C:\Projecten\Woonwaard_Clusters\Woonwaard_objecten.gdb\WoonwaardClusterModel"
 Clustersprojecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Clustersvprojecten"
 AlleProjecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\AlleProjecten"
@@ -53,24 +53,23 @@ arcpy.conversion.ExportFeatures(Projecten_nw, Projecten_oud,where_clause)
 import pyodbc
 
 print("Stap 1a samenstellen connectiestring naar sql server")
-import pyodbc
 DRIVER = 'ODBC Driver 18 for SQL Server'
-SERVER = 'sql-datastorage-prod.database.windows.net'
-DATABASE = 'sdb-datastorage-prod'
+SERVER = '<uw servernaam>'
+DATABASE = '<databasenaam>'
 USERNAME = '<adminaccount>'
 PASSWORD = '<psw>'
 
 print("Testen of tabel Projecten leeg is")
 connectionString = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
 conn = pyodbc.connect(connectionString)
-sql_query = pd.read_sql_query("SELECT count(*) FROM arcgis.vw_alle_projecten",conn)
+sql_query = pd.read_sql_query("SELECT count(*) FROM <naam van view of tabel met data>",conn)
 Aantal = sql_query
 
 print((Aantal == 0).bool())
 
 if (Aantal == 0).bool():
     # Vul hier de juist webhook URL van de werkstroomstap in
-    webhook_url = 'vul hier uw Power automate workflow webhook id bij bericht geen data in SQL'
+    webhook_url = '<vul hier uw Power automate workflow webhook id bij bericht geen data in SQL>'
 
     # verstuur bericht
     response = requests.post(webhook_url, headers={'Content-Type': 'application/json'})
@@ -285,7 +284,7 @@ print("Stap 8, 1 van 3 voorbereiden vernieuwen data")
 
 # GIS object aanmaken
 print("verbinding maken met ArcGIS Online")
-gis = GIS('home')
+gis = GIS('home')          #
 
 # Maak een variabele UUID voor de geodatabase
 gdbId = str(uuid.uuid1())
