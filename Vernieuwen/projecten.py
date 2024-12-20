@@ -36,12 +36,11 @@ print("Stap 0 van 6: Script gestart...")
 import pyodbc
 
 print("Stap 1a samenstellen connectiestring naar sql server")
-import pyodbc
 DRIVER = 'ODBC Driver 18 for SQL Server'
 SERVER = 'sql-datastorage-prod.database.windows.net'
 DATABASE = 'sdb-datastorage-prod'
-USERNAME = 'Arcgisadmin'
-PASSWORD = 'R4cdL03$kMm@'
+USERNAME = '<adminacc>'
+PASSWORD = '<pwf>'
 
 print("Testen of tabel Projecten leeg is")
 connectionString = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
