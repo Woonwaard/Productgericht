@@ -40,7 +40,7 @@ DRIVER = 'ODBC Driver 18 for SQL Server'
 SERVER = 'sql-datastorage-prod.database.windows.net'
 DATABASE = 'sdb-datastorage-prod'
 USERNAME = '<adminacc>'
-PASSWORD = '<pwf>'
+PASSWORD = '<pwd>'
 
 print("Testen of tabel Projecten leeg is")
 connectionString = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
@@ -73,7 +73,6 @@ df.to_csv (r'C:\csv\projecten\export_projecten.csv', index= False)
 print("Stap 1c van 6: Inlezen csv in geodatabase via export table")
 newFile = r"C:\csv\projecten\export_projecten.csv"
 AlleProjecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\AlleProjecten"
-
 out_gdb = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb"
 arcpy.conversion.ExportTable(newFile, AlleProjecten)
 
