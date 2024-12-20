@@ -34,6 +34,8 @@ startTime = time.time()
 
 # Parameters:
 #Vervang de locaties door uw eigen locaties op de harde schijf bij het project!!
+#Dit is namelijk de locatie van het project en feature layers op de harde schijf.
+#Het is aan te bevelen om deze projecten op de C schijf te zetten en niet op One drive of iets anders in de cloud te zetten: Het synchroniseren gaat te landzaam en zal tot foutmeldingen leiden!
 Clusterswoonwaard = r"C:\Projecten\Woonwaard_Clusters\Woonwaard_objecten.gdb\WoonwaardClusterModel"
 Clustersprojecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Clustersvprojecten"
 AlleProjecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\AlleProjecten"
@@ -42,13 +44,6 @@ Projecten = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Projecten"
 Projecten_nw = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Projecten_nw"
 
 print("Stap 0 van 6: Script gestart...")
-#Extra stap voor versturen berichten aan rayon export features van huidige data naar oud
-Projecten_oud = r"C:\Projecten\WoonwaardProjecten\WoonwaardProjecten.gdb\Projecten_oud"
-where_clause="Project_type = 'PO' And Start_jaar = 2024"
-if arcpy.Exists(Projecten_oud):
-    arcpy.Delete_management(Projecten_oud)
-arcpy.conversion.ExportFeatures(Projecten_nw, Projecten_oud,where_clause)
-
 #ophalen data uit de view
 import pyodbc
 
@@ -79,7 +74,7 @@ if (Aantal == 0).bool():
 print("Projecten is gevuld dus laden zal nu starten")
 
 
-#Verwijderen van bestaande data
+#Verwijderen van bestaande data vanwege het iedere dag draaien, eerst data van gisteren verwijderen.
 if arcpy.Exists(Clustersprojecten):
     arcpy.Delete_management(Clustersprojecten)
 if arcpy.Exists(AlleProjecten):
