@@ -17,3 +17,9 @@ De scripts zijn gescheduled via de task scheduler op de server via een service a
 De machine staat altijd uit.
 Vlak voordat de scripts zijn gepland in de taskscheduler wordt de machine via een taak in Azure aangezet.
 Enige tijd nadat de scripts normaal gesproken zijn afgerond, wordt de machine via een andere taak uitgezet en 'gedetached'.
+
+Let op:
+- De scripts bevatten nog veel harde verwijzingen naar locaties die u moet aanpassen.
+- Wij hebben geen mogelijkheid gevonden om verbinding te maken met de SQL server dan op de manier in dit script. WIj hebben de namen en ww van onze omgeving vervangen door <aanwijzingen>.
+- Deze scripts zijn in combinatie eigen werk, maar wel gedeeltelijk samengesteld uit online gevonden functies en mogelijkheden.
+- Deze script werken voor ons, maar u zal veel testen nodig hebben om het werkend te krijgen.
