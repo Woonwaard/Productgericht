@@ -1,4 +1,4 @@
-Deze map bevat script die wij hebben gemaakt om onze ArcGIS producten automatisch te kunnen vernieuwen.
+Deze map bevat diverse scripts die wij hebben gemaakt om onze ArcGIS producten automatisch te kunnen vernieuwen.
 Hiervoor hebben wij een kleine windows server in Azure laten inrichten.
 Op deze machine staat:
 - ArcGIS Pro.
@@ -13,3 +13,7 @@ In PowerAutomate hebben wij per product 2 werkstromen aangemaakt:
 2: Stuur bericht naar Teams kanaal omdat data is bijgewerkt.
 
 De scripts zijn gescheduled via de task scheduler op de server via een service account.
+
+De machine staat altijd uit.
+Vlak voordat de scripts zijn gepland in de taskscheduler wordt de machine via een taak in Azure aangezet.
+Enige tijd nadat de scripts normaal gesproken zijn afgerond, wordt de machine via een andere taak uitgezet en 'gedetached'.
