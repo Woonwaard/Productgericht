@@ -4,6 +4,9 @@ Op deze machine staat:
 - ArcGIS Pro.
 - inrichting om de scripts via de taskscheduler te kunnen draaien.
 
+Alle scripts zijn gebaseerd op een product specfiek ArcGIS Pro project. Deze bevat ook de data die wij naar de online omgeving opsturen.
+U zult dus eerst het project moeten aanmaken en daarna de verwijzingen naar locaties en mappen moeten aanpassen naar uw locatie binnen uw project!
+
 De meeste scripts lezen data vanaf vanaf de SQL omgeving in. Hiervoor is per product een aparte map aangemaakt op de server, in deze map wordt door het script het csv bestand aangemaakt.
 Iedere map heeft ook een scheme.ini bestand, die ervoor zorgt dat de data juist in ArcGIS wordt ingelezen. Met name text velden worden anders aangemaakt met CHAR(8000).
 
